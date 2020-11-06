@@ -16,22 +16,22 @@ def category_in_string(s, category):
         print("\t[Exact result not found. Showing similar result]\n\t"+f_sen)
 
 def wiki_search(search_term, category):
-        while Limiter.Search_Number < 3:
-            try:
-                keyword = wikipedia.search(search_term)[Limiter.Search_Number]
-                WikiInfo = str(wikipedia.summary(keyword, sentences=5, auto_suggest=False))
-            except:
-                sys.exit("Page not found")
-            print("\nSearch #"+str(Limiter.Search_Number + 1))
-            if category != '':
-                print("\tSearching", "'"+keyword+"'", "under", category, "category.")
-                is_there_category_in_string = category_in_string(WikiInfo, category)
-                if is_there_category_in_string == "Yes":
-                    return(WikiInfo)
-                else:
-                    Limiter.Search_Number += 1
-                    WikiInfo = wiki_search(search_term, category)
-            return(WikiInfo)
+    while Limiter.Search_Number < 3:
+        try:
+            keyword = wikipedia.search(search_term)[Limiter.Search_Number]
+            WikiInfo = str(wikipedia.summary(keyword, sentences=5, auto_suggest=False))
+        except:
+            sys.exit("Page not found")
+        print("\nSearch #"+str(Limiter.Search_Number + 1))
+        if category != '':
+            print("\tSearching", "'"+keyword+"'", "under", category, "category.")
+            is_there_category_in_string = category_in_string(WikiInfo, category)
+            if is_there_category_in_string == "Yes":
+                return(WikiInfo)
+            else:
+                Limiter.Search_Number += 1
+                WikiInfo = wiki_search(search_term, category)
+        return(WikiInfo)
 
 
 if __name__ == "__main__":
